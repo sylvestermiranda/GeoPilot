@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Helmet</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+        .password-container input {
+            width: 100%;
+            padding-right: 40px; 
+        }
+        .password-container i {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="glow"></div>
+  
+    <header id="project-header">
+        <h1>GeoPilot</h1>
+    </header>
+
+ 
+    <div id="form-container">
+  
+        <div id="signup">
+            <h2>Sign Up</h2>
+            <form id="signup-form">
+                <input type="text" id="signup-name" placeholder="Full Name" required>
+                <input type="text" id="signup-phone" placeholder="Phone Number" required>
+                
+             
+                <div>
+                    <label for="driving-license">Do you have a driving license?</label><br>
+                    <input type="radio" id="license-yes" name="driving-license" value="yes" required> Yes
+                    <input type="radio" id="license-no" name="driving-license" value="no" required> No
+                </div>
+                
+             
+                <input type="email" id="parent-email" placeholder="Parent's Email" required>
+                <input type="text" id="parent-phone" placeholder="Parent's Phone Number" required>
+                
+           
+                <input type="email" id="signup-email" placeholder="Email" required>
+                
+     
+                <div class="password-container">
+                    <input type="password" id="signup-password" placeholder="Password" required>
+                    <i id="signup-eye" class="fas fa-eye"></i>
+                </div>
+             
+                <div>
+                    <input type="checkbox" id="terms-consent" required>
+                    <label for="terms-consent" style="font-style: italic;">
+                        I agree to the <a href="privacy-policy.html" target="_blank">Privacy Policy</a> and understand that my data will be collected for the purpose of using GuardTrak.
+                    </label>
+                </div>
+                <div id="signup-message" class="message"></div>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+ 
+        <div id="login">
+            <h2>Login</h2>
+            <form id="login-form">
+                <input type="email" id="login-email" placeholder="Email" required>
+                 
+                <div class="password-container">
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <i id="login-eye" class="fas fa-eye"></i>
+                </div>
+                
+                <div id="login-message" class="message"></div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        const glow = document.querySelector('.glow');
+
+      
+        function updateGlowPosition(e) {
+            const x = e.pageX;
+            const y = e.pageY;
+
+        
+            glow.style.left = `${x}px`;
+            glow.style.top = `${y}px`;
+        }
+ 
+        document.addEventListener('mousemove', (e) => {
+            requestAnimationFrame(() => {
+                updateGlowPosition(e);
+            });
+        });
+    </script>
+
+    
+    <script>
+    
+        document.getElementById('signup-eye').addEventListener('click', function() {
+            const passwordField = document.getElementById('signup-password');
+            const type = passwordField.type === 'password' ? 'text' : 'password';
+            passwordField.type = type;
+            
+       
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+ 
+        document.getElementById('login-eye').addEventListener('click', function() {
+            const passwordField = document.getElementById('login-password');
+            const type = passwordField.type === 'password' ? 'text' : 'password';
+            passwordField.type = type;
+            
+            
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
+
+  
+    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js"></script>
+    <script type="module" src="app.js"></script>
+</body>
+</html>
